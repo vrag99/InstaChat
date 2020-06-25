@@ -1,0 +1,127 @@
+body{
+    background: url('https://images.hdqwalls.com/wallpapers/blue-sea-and-purple-sky-do.jpg');
+    background-size: cover ;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:100vh;
+}
+
+.poppins{
+    font-family: 'Poppins';
+}
+
+/* Defining the main area for our chatbox */
+.main{
+    width:100%;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+/* The header part which displays who is typing and how many people are online */
+.msg-area-header{
+    width:100%;
+    background-color: #eeeeee;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+    padding:15px;
+    padding-bottom:1px !important;
+    text-align: center;
+    font-size: medium;
+}
+
+/* The main area where all our messages pop up */
+.msg-area-body{
+    width:100%;
+    background-color: white;
+    height:65vh;
+    padding:20px 5px 20px 5px;
+    overflow-y: auto;
+}
+
+/* The form for sending the message */
+.msg-send-form{
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    padding-top: 3px;
+    padding-bottom: 1px;
+}
+
+/* Formatting the messages sent and recieved */
+
+/* Message recieved */
+.msg{
+    min-width: 75px;
+    max-width: 300px;
+    height:auto;
+    clear:both;
+    background-color: #eceff1;
+    margin:20px;
+    text-align: left;
+    padding:10px;
+    border-radius: 10px;
+    font-size: 15px;
+    color:black;
+} 
+
+/* Message sent */
+.you{
+    background-color: #ba68c8;
+    color:white !important;
+}
+
+/* The message header part which displays the name */
+.msg-head{
+    font-weight: 700;
+    text-align: left;
+}
+
+/* The message displayed when someone joins or leaves the room */
+.join-or-leave-msg{
+    padding: 10px; 
+    height:auto;
+    clear: both;
+    margin: 20px;
+    background-color: #f5f5f5;
+    font-size: 15px;
+    border-radius: 5px;
+    text-align: center;
+    color:black;
+}
+
+/* Style for the time displayed */
+.msg-time{
+    font-size:small;
+    margin: 25px 0 0 5px;
+    float: right;
+    font-weight: 300;
+}
+
+/* Shortening the top margin of our chatbox for small-height devices */
+@media only screen and (max-height: 755px) {
+    .main{
+    width:100%;
+    margin-top: 10px;
+    }
+}
+
+/* Decreasing the messages' size for small-width devices */
+@media only screen and (max-width: 450px){
+    .msg{
+    min-width: 60px;
+    max-width: 240px;
+    height:auto;
+    clear:both;
+    background-color: #eceff1;
+    margin:20px;
+    text-align: left;
+    padding:10px;
+    border-radius: 10px;
+    font-size: 15px;
+    color:black;
+    } 
+
+    .you{
+    background-color: #ba68c8;
+    color:white !important;
+    }
+}

@@ -1,0 +1,53 @@
+*{
+    font-family: 'Poppins';
+}
+
+body{
+    background: url('https://img.freepik.com/free-photo/modern-futuristic-neon-light-background_33739-414.jpg?size=626&ext=jpg');
+    background-position: center;
+    background-size: cover;
+    opacity: 0.95;
+}
+
+/* Defing the main login-form area */
+.login{
+    width:100%;
+    height:100vh;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styling for the main form */
+form{
+    background: white;
+    width:60vh;
+    min-height: 50vh;
+    padding:30px;
+    border-radius: 10px;
+    padding-top: 0 !important;
+}
+
+input[type=text]{
+    font-size: large !important;
+    margin: 10px 0 30px 0 !important;
+}
+
+/* Login button styling */
+.login-button{
+    text-transform:uppercase;
+    font-weight: 400;
+    font-size:20px;
+    padding:20px 80px;
+    margin-top: 20px;
+    border-radius: 40px;
+    border:none;
+    cursor: pointer;
+    background: linear-gradient(to right, #12c2e9, #c471ed);
+    color: white;
+    transition: 0.3s;
+}
+
+.login-button:hover{
+    transform: scale(1.05);
+}
