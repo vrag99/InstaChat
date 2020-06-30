@@ -108,7 +108,7 @@ function timeoutFunction(){
   socket.emit('typing', false)
 }
 
-document.getElementById('user-message').addEventListener('keypress', ()=>{
+document.getElementById('user-message').addEventListener('keydown', ()=>{
     socket.emit('typing', true)
     clearTimeout(timeout)
     timeout = setTimeout(timeoutFunction, 2500)

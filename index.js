@@ -63,20 +63,24 @@ io.on('connection', socket =>{
         if (user){
             //Notifying everyone in the room that the person has left
             socket.broadcast.to(user.room).emit('leave', user.username)
-        }
 
-        //Updating the list of online people
-        var online_people = users.filter(person=> person.room === user.room)
-        io.to(user.room).emit('online-people-list', online_people)
+            //Updating the list of online people
+            var online_people = users.filter(person=> person.room === user.room)
+            io.to(user.room).emit('online-people-list', online_people)
+        }
 
 
     })
 
     socket.on('typing', TorF=>{
         const user = users.find(user=>user.id === socket.id)
+
+        //If someone is typing
         if(TorF==true){
             socket.broadcast.to(user.room).emit('Someone-typing', user.username)
         }
+
+        //If nobody is typing
         else{
             socket.broadcast.to(user.room).emit('nobody-typing')
         }
