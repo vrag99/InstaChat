@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstaChat</title>
+    <title>InstaChat - Realtime chat app</title>
 
     <!--Custom font poppins-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
     <!--Navbar for indicating the chatroom-->
     <nav style="background-color: rgba(0,0,0,0.3);">
         <div class="nav-wrapper container">
-            <a class="brand-logo poppins center" style="font-weight:600;">Room <span id="chatroom-name">A</span></i></a>
+            <a class="brand-logo poppins center" style="font-weight:600;">Room <span id="chatroom-name"></span></i></a>
         </div>
     </nav>
 
@@ -97,6 +97,12 @@
     
     <!--Materialize js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!--Query string library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha256-ijqLssetA1NMNjZ+w1zaUafQQLm4IW5OoM8O+4tatME=" crossorigin="anonymous"></script>
+
+    <!--Socket io script-->
+    <script src="/socket.io/socket.io.js"></script>
 
     <!--Custom js-->
     <script src="js/chat.js"></script>
