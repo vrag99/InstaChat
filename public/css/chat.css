@@ -91,7 +91,7 @@ body{
 /* Style for the time displayed */
 .msg-time{
     font-size:small;
-    margin: 25px 0 0 5px;
+    margin: 20px 0 0 5px;
     float: right;
     font-weight: 300;
 }

@@ -13,6 +13,40 @@ const {username, room} = Qs.parse(location.search,{
     ignoreQueryPrefix : true,
 })
 
+
+// Function for appending messages
+function appendMsg(message, position){
+    const msgArea = document.querySelector('.msg-area-body')
+    const msgElement = document.createElement('div')
+
+    // Message for joining or leaving the room
+    if (position==='center'){
+        msgElement.classList.add('join-or-leave-msg')
+    }
+
+    //Message sent by the user
+    else if (position==='right'){
+        msgElement.classList.add('msg','you',position)
+    }
+
+    //Message recieved by the user
+    else{
+        msgElement.classList.add('msg', position)
+    }
+
+    msgElement.innerHTML = message
+    msgArea.appendChild(msgElement)
+}
+
+
+//Function for getting the current time
+function currentTime(){
+    const current_time = new Date().toLocaleTimeString([], {
+        hour:'numeric', minute:'numeric', hour12:true
+    })
+    return current_time
+}
+
 /////////////////All socket functions/////////////////////////
 
 //Letting the server know when a user has joined
@@ -24,7 +58,7 @@ socket.on('current-room', room=>{
     current_room.innerText = room
 })
 
-//Updating the list of people online
+//Getting the list of people online
 socket.on('online-people-list', people=>{
 
     //Updating the number of people online
@@ -35,4 +69,45 @@ socket.on('online-people-list', people=>{
     var people_list = document.getElementById('people-online-list')    
     people_list.innerHTML = `${people.map(user => `<li class="collection-item center">${user.username}</li>`).join('')}`
     
+})
+
+//Notify others when a new-user joins
+socket.on('new-user', name=>{
+    appendMsg(`${name} has joined the chat`, 'center')
+})
+
+//Getting the form for sending the messages
+const msgForm = document.querySelector('.msg-send-form')
+msgForm.addEventListener('submit', e=>{
+    e.preventDefault()
+
+    //Getting the user's entered message
+    var msgInput = document.getElementById('user-message')
+    var msg = msgInput.value
+
+    //Emitting the message to the server
+    socket.emit('send-message', msg)
+
+    appendMsg(`<div class="msg-head">You</div>
+                    ${msg}
+                <span class="msg-time">
+                    ${currentTime()}
+                </span>`, 'right')
+
+    //Emptying the msgbox after the msg is sent
+    msgInput.value = ''
+})
+
+//On receiving a message ..
+socket.on('receive-message', data=>{
+    appendMsg(`<div class="msg-head">${data.username}</div>
+                    ${data.message}
+                <span class="msg-time">
+                    ${currentTime()}
+                </span>`, 'left')
+})
+
+//When a user leaves the room
+socket.on('leave', name=>{
+    appendMsg(`${name} has left the chat`, 'center')
 })

@@ -42,8 +42,34 @@ io.on('connection', socket =>{
         var online_people = users.filter(user=> user.room === userData.room)
         io.to(userData.room).emit('online-people-list', online_people)
     })
-})
 
+    //Broadcast the sent message to all the people in the room
+    socket.on('send-message', msg=>{
+        const user = users.find(user=> user.id === socket.id)
+        socket.broadcast.to(user.room).emit('receive-message',{ username: user.username, message: msg })
+    })
+
+    socket.on('disconnect', ()=>{
+
+        //Getting the user who has left the chat and removing it from our users list
+        var user = users.find(user=> user.id === socket.id)
+
+        for(var i=0; i < users.length; i++){
+            if (users[i] === user){
+                users.splice(i, 1)
+            }
+        }
+
+        //Notifying everyone in the room that the person has left
+        socket.broadcast.to(user.room).emit('leave', user.username)
+
+        //Updating the list of online people
+        var online_people = users.filter(person=> person.room === user.room)
+        io.to(user.room).emit('online-people-list', online_people)
+
+
+    })
+})
 
 
 
