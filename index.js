@@ -60,8 +60,10 @@ io.on('connection', socket =>{
             }
         }
 
-        //Notifying everyone in the room that the person has left
-        socket.broadcast.to(user.room).emit('leave', user.username)
+        if (user){
+            //Notifying everyone in the room that the person has left
+            socket.broadcast.to(user.room).emit('leave', user.username)
+        }
 
         //Updating the list of online people
         var online_people = users.filter(person=> person.room === user.room)

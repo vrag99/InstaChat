@@ -47,6 +47,53 @@ function currentTime(){
     return current_time
 }
 
+
+///////////The voice type function///////////////
+function voiceType(){
+    const msgInput = document.getElementById('user-message');
+    const voiceInpBtn = document.getElementById('voice-type')
+
+    //Getting speech recognition
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+
+    var grammar = '#JSGF V1.0;'
+
+    //Initializing recognition object
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+
+    //Getting the speech to text
+    recognition.onresult = function(event) {
+        var last = event.results.length - 1;
+        var command = event.results[last][0].transcript;
+        msgInput.value = command  
+
+    };
+
+    //Stop recognition when stopped speaking
+    recognition.onspeechend = function() {
+        recognition.stop();
+        M.toast.dismiss()
+    };
+
+    //Notify when an error comes
+    recognition.onerror = function() {
+        M.toast({html:'Sorry, there was an error in recgnition :(', classes: 'rounded'})
+    }
+
+    //Start recognition when button is pressed
+    voiceInpBtn.addEventListener('click', function(){
+        recognition.start();
+        M.toast({html: 'Listening', classes:'rounded'})
+    });
+}
+
+voiceType()
+
+
 /////////////////All socket functions/////////////////////////
 
 //Letting the server know when a user has joined
