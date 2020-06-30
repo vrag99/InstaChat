@@ -71,6 +71,16 @@ io.on('connection', socket =>{
 
 
     })
+
+    socket.on('typing', TorF=>{
+        const user = users.find(user=>user.id === socket.id)
+        if(TorF==true){
+            socket.broadcast.to(user.room).emit('Someone-typing', user.username)
+        }
+        else{
+            socket.broadcast.to(user.room).emit('nobody-typing')
+        }
+    })
 })
 
 

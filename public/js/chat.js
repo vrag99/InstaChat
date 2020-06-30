@@ -94,6 +94,22 @@ function voiceType(){
 voiceType()
 
 
+///////////////////User is typing function/////////////////////////
+var typing = false;
+var timeout = undefined;
+
+function timeoutFunction(){
+  socket.emit('typing', false)
+}
+
+document.getElementById('user-message').addEventListener('keypress', ()=>{
+    socket.emit('typing', true)
+    clearTimeout(timeout)
+    timeout = setTimeout(timeoutFunction, 2500)
+})
+
+
+
 /////////////////All socket functions/////////////////////////
 
 //Letting the server know when a user has joined
@@ -153,6 +169,20 @@ socket.on('receive-message', data=>{
                     ${currentTime()}
                 </span>`, 'left')
 })
+
+
+//If somebody is typing..
+
+const typing_status = document.getElementById('typing')
+
+socket.on('Someone-typing', name=>{
+    typing_status.innerText = `${name} is typing..`
+})
+
+socket.on('nobody-typing', ()=>{
+    typing_status.innerText = ''
+})
+
 
 //When a user leaves the room
 socket.on('leave', name=>{
