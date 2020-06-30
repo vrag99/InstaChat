@@ -36,6 +36,7 @@ function appendMsg(message, position){
 
     msgElement.innerHTML = message
     msgArea.appendChild(msgElement)
+    gotoBottom('message-body')
 }
 
 
@@ -47,6 +48,11 @@ function currentTime(){
     return current_time
 }
 
+// Function for auto-scrolling
+function gotoBottom(id){
+    var element = document.getElementById(id);
+    element.scrollTop = element.scrollHeight - element.clientHeight;
+ }
 
 ///////////The voice type function///////////////
 function voiceType(){
