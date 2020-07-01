@@ -3,7 +3,7 @@ body{
     background-size: cover ;
     background-repeat: no-repeat;
     background-position: center;
-    height:100vh;
+    background-attachment: fixed;
 }
 
 .poppins{
@@ -13,7 +13,7 @@ body{
 /* Defining the main area for our chatbox */
 .main{
     width:100%;
-    margin-top: 40px;
+    margin-top: 30px;
     border-radius: 10px;
 }
 
@@ -44,6 +44,7 @@ body{
     border-radius: 0 0 10px 10px;
     padding-top: 3px;
     padding-bottom: 1px;
+    margin-bottom: 10px;
 }
 
 /* Formatting the messages sent and recieved */
@@ -61,6 +62,7 @@ body{
     border-radius: 10px;
     font-size: 15px;
     color:black;
+    word-wrap: break-word;
 } 
 
 /* Message sent */
@@ -91,21 +93,29 @@ body{
 /* Style for the time displayed */
 .msg-time{
     font-size:small;
-    margin: 20px 0 0 5px;
+    margin: 20px 5px 0 5px;
     float: right;
     font-weight: 300;
 }
 
-/* Shortening the top margin of our chatbox for small-height devices */
-@media only screen and (max-height: 755px) {
+/* Resizing and positioning the chatbox for small-heighted devices */
+@media only screen and (max-height: 800px) {
     .main{
     width:100%;
     margin-top: 10px;
     }
+
+    .msg-area-body{
+        width:100%;
+        background-color: white;
+        height:60vh;
+        padding:20px 5px 20px 5px;
+        overflow-y: auto;
+    }
 }
 
 /* Decreasing the messages' size for small-width devices */
-@media only screen and (max-width: 450px){
+@media only screen and (max-width: 500px){
     .msg{
     min-width: 60px;
     max-width: 240px;
@@ -116,7 +126,7 @@ body{
     text-align: left;
     padding:10px;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 14px;
     color:black;
     } 
 
@@ -124,4 +134,14 @@ body{
     background-color: #ba68c8;
     color:white !important;
     }
+
+    /* Shortening the font for the time */
+    .msg-time{
+        font-size:small;
+        margin: 18px 0px 0 3px;
+        float: right;
+        font-weight: 300;
+        font-size: 12px;
+    }
+
 }

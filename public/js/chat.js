@@ -108,10 +108,19 @@ function timeoutFunction(){
   socket.emit('typing', false)
 }
 
-document.getElementById('user-message').addEventListener('keydown', ()=>{
-    socket.emit('typing', true)
-    clearTimeout(timeout)
-    timeout = setTimeout(timeoutFunction, 2500)
+document.getElementById('user-message').addEventListener('keydown', (e)=>{
+
+    //If the user presses other key than enter
+    if(e.keyCode!=13){
+        socket.emit('typing', true)
+        clearTimeout(timeout)
+        timeout = setTimeout(timeoutFunction, 2000)
+    }
+    
+    else{
+        clearTimeout(timeout)
+        timeout = setTimeout(timeoutFunction, 0)
+    }
 })
 
 
